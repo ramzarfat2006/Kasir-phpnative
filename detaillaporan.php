@@ -40,7 +40,6 @@
                 <h2 class="mt-4">Detail Laporan</h2>
 
                 <a href="laporan.php" class="btn btn-secondary btn-print">Kembali</a>
-                <a type="button" class="btn btn-danger btn-print" onclick="window.print()">Cetak</a>
                 <br><br>
 
                 <form method="post">

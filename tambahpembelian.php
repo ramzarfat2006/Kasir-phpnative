@@ -6,7 +6,7 @@
         $id_user= $_POST['id_user'];
         $produk= $_POST['produk'];
         $total= 0;
-        $tanggal = date('Y/m/d');
+        $tanggal = date('Y-m-d');
         $kode_penjualan = uniqid();
 
         $query = mysqli_query($koneksi, "INSERT INTO penjualan (tanggal_penjualan,id_pelanggan,id_user,kode_penjualan) VALUES ('$tanggal','$id_pelanggan','$id_user','$kode_penjualan')");

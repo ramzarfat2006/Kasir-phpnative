@@ -20,6 +20,14 @@
 
     <?php include 'layout/css.php' ?>
 
+    <style>
+        @media print {
+            .btn-print, .form-control, .form-label, .navbar, .footer {
+                display: none;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -48,8 +56,9 @@
                             <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
                         </div>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary mt-4">Tampilkan Laporan</button>
-                            <a href="laporan.php" class="btn btn-secondary mt-4">Reset</a>
+                            <button type="submit" class="btn btn-primary mt-4 btn-print">Tampilkan Laporan</button>
+                            <a href="laporan.php" class="btn btn-secondary mt-4 btn-print">Reset</a>
+                            <a type="button" class="btn btn-danger mt-4 btn-print" onclick="window.print()">Cetak</a>
                         </div>
                     </div>
                 </form>
@@ -90,7 +99,7 @@
                             </td>
                             <td>
                                 <a href="detaillaporan.php?id=<?php echo $data['id_penjualan']; ?>"
-                                    class="btn btn-success">Detail</a>
+                                    class="btn btn-success btn-print">Detail</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

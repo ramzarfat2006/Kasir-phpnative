@@ -3,7 +3,12 @@
     include 'koneksi.php';
     $id = $_GET['id'];
     $query = mysqli_query($koneksi, "SELECT * FROM penjualan LEFT JOIN pelanggan ON pelanggan.id_pelanggan = penjualan.id_pelanggan WHERE id_penjualan = $id");
-    $data = mysqli_fetch_array($query);
+    $data = mysqli_fetch_array($query); 
+    $total_harga = $data['total_harga'];
+    if($data['bayar'] > 0){
+        $kembalian = $data['bayar'] - $total_harga;   
+    }
+
 
     if(isset($_POST['bayar'])){
         $bayar = $_POST['bayar'];
@@ -13,6 +18,7 @@
             echo '<script>alert("Uang tidak cukup!")</script>';
         } else {
             $kembalian = $bayar - $total_harga;
+
             echo '<script>alert("Kembalian Anda : '.$kembalian.'");</script>';
 
             $query_bayar = mysqli_query($koneksi, "UPDATE penjualan SET bayar = $bayar WHERE id_penjualan = $id");
@@ -103,13 +109,20 @@
                             <td>:</td>
                             <td>
                                 <?php if(isset($data['bayar']) && $data['bayar'] > 0) {
-                                    echo '<button type="button" class="btn btn-success mt-2 btn-print" disabled>Sudah Dibayar</button>';
+                                    echo 'Sudah Dibayar : '.$data['bayar'].'';
                                 } else { ?>
                                 <form method="post">
                                     <input class="form-control" type="number" name="bayar" value="<?php echo $data['bayar']; ?>">
                                     <button type="submit" class="btn btn-primary mt-2 btn-print">Bayar</button>
                                 </form>
                                 <?php } ?>
+                            </td>
+                            <td>
+                                <?php if($data['bayar'] > 0) {
+                                    echo 'Kembalian Anda : '.$kembalian;
+                                } else {
+                                    echo 'Belum Dibayar';
+                                } ?>
                             </td>
                         </tr>
                     </table>
